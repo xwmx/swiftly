@@ -19,7 +19,8 @@ own directory, with a subdirectory set to the last modified timestamp of the
 source file, and a binary name set to the original executable name so
 internal references to the executable name work properly. The resulting final
 directory structure is:
-  `$HOME/.swiftly/cache/binary_name/last_modified_timestamp/binary_name`
+
+    $HOME/.swiftly/cache/executable_filenename/last_modified_timestamp/executable_filenename
 
 ## Rationale
 
