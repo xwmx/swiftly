@@ -1,14 +1,14 @@
 #!/usr/bin/env swiftly
 
-// Test file for swiftly
+// Example file for swiftly
 
 import Foundation
 
-println("test.swift: running")
+println("example.swift: running")
 
 var index = 0
 for argument in Process.arguments {
-    println("test.swift argument [\(index)]: \(argument)")
+    println("example.swift argument [\(index)]: \(argument)")
     index++
 }
 

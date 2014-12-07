@@ -45,11 +45,11 @@ For a small comparison:
 
 REPL (first run)
 
-    ./test.swift example  0.13s user 0.06s system 90% cpu 0.208 total
+    ./example.swift example  0.13s user 0.06s system 90% cpu 0.208 total
 
 compiled (all subsequent runs)
 
-    ./test.swift example  0.01s user 0.01s system 85% cpu 0.018 total
+    ./example.swift example  0.01s user 0.01s system 85% cpu 0.018 total
 
 ## Caveats
 
