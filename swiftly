@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+#                  _______________________
+# __________      ____(_)__  __/_  /___  /____  __
+# __  ___/_ | /| / /_  /__  /_ _  __/_  /__  / / /
+# _(__  )__ |/ |/ /_  / _  __/ / /_ _  / _  /_/ /
+# /____/ ____/|__/ /_/  /_/    \__/ /_/  _\__, /
+#                                        /____/
+# Swiftly
+#
+# Transparent compilation for swift scripts.
+#
+# When added used to run swift command line programs, compiles the program,
+# saves the binary to a cache directory, and then calls the binary. On
+# subsequent runs, the binary is called instead of using the REPL.
+#
+# Binaries are stored in subdirectories at `$HOME/.swiftly/cache/`, which is
+# created when `swiftly` is called for the first time. Each binary gets it
+# own directory, and the filename of each binary is set to the last
+# modified timestamp of the source file, resulting in a final directory
+# structure of: $HOME/.swiftly/cache/binary_name/last_modified_timestamp`
+
+#==========================================================================
+# Functions
+#==========================================================================
+
+# Check whether a program exists in the PATH
+#
+# For information on why `which` is not being used, see:
+# http://stackoverflow.com/a/677212
+function program_exists() {
+  hash $1 2>/dev/null
+}
+
+# Execute swiftc with the `macosx` sdk
+function compile_swift() {
+  echo "compile_swift: $1 and $2"
+  [ -z "$1" ] && echo "compile_swift(): output path not specified"
+  [ -z "$2" ] && echo "compile_swift(): Source path not specified"
+  /usr/bin/env xcrun -sdk macosx swiftc -o $1 $2
+}
+
+#==========================================================================
+# Swiftly directory
+#
+# .swiftly directory in the $HOME
+#==========================================================================
+
+# set the swiftly directory
+swiftly_directory=$HOME/.swiftly
+
+# if swiftly directory doesn't exist, create it.
+if [ ! -d $swiftly_directory ]; then
+  mkdir $swiftly_directory
+fi
+
+#==========================================================================
+# cache directory
+#
+# cache directory that contains all the compiled binaries
+#==========================================================================
+
+# set the swifly cache directory, which holds the binary files.
+cache_dir="$swiftly_directory/cache"
+
+# if cache directory doesn't exist, create it.
+if [ ! -d $cache_dir ]; then
+  mkdir $cache_dir
+fi
+
+#==========================================================================
+# Help
+#==========================================================================
+
+read -r -d '' usage <<- EOM
+Usage: swiftly program ...
+
+Transparent compilation for Swift scripts.
+
+Use as shebang in swift script to transparently compile and store binary in a
+cached location.
+
+Example shebang:
+  !#/usr/bin/env swiftly
+EOM
+
+
+# Print usage information if passed `-h` flag
+if [ "$1" == "-h" ]; then
+  echo "$usage"
+  exit 1
+fi
+
+# if the calling program doesn't exist, print usage info and exit.
+if [ -z "$1" ]; then
+  echo "$usage"
+  exit 1
+fi
+
+#==========================================================================
+# program variables
+#==========================================================================
+
+program=$1
+program_basename=$(basename $program)
+program_timestamp=$(stat -f '%m' $program)
+program_arguments=${*:2}
+
+# if the calling program doesn't exist, print usage info and exit.
+if ! program_exists $program_basename; then
+  echo "$usage"
+  exit 1
+fi
+
+#==========================================================================
+# program variables
+#==========================================================================
+
+binary_dir="$cache_dir/$program_basename"
+binary_filename="$program_timestamp"
+binary_path="$binary_dir/$binary_filename"
+
+#==========================================================================
+# program variables
+#==========================================================================
+
+
+if [ ! -f $binary_path ]; then
+  if [ ! -d $binary_dir ]; then
+    mkdir $binary_dir
+  fi
+
+  compile_swift $binary_path $program
+fi
+
+# call the compiled binary
+$binary_path $program_arguments
+
+
