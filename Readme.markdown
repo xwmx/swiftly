@@ -15,9 +15,10 @@ the binary is called instead of using the REPL.
 
 Binaries are stored in subdirectories at `$HOME/.swiftly/cache/`, which is
 created when `swiftly` is called for the first time. Each binary gets it
-own directory, and the filename of each binary is set to the last
-modified timestamp of the source file, resulting in a final directory
-structure of:
+own directory, with a subdirectory set to the last modified timestamp of the
+source file, and a binary name set to the original executable name so
+internal references to the executable name work properly. The resulting final
+directory structure is:
   `$HOME/.swiftly/cache/binary_name/last_modified_timestamp/binary_name`
 
 ## Rationale
@@ -41,4 +42,4 @@ hear suggestions and learn more.
 
 ## TODO
 
-Remove old binary files.
+Automatically remove outdated cached binary files.
