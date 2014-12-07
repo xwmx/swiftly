@@ -22,6 +22,16 @@ directory structure is:
 
     $HOME/.swiftly/cache/executable_filenename/last_modified_timestamp/executable_filenename
 
+## Installation
+
+Simply add the `swiftly` executable to your `$PATH` and use it in place
+of the `swift` command when running swift scripts.
+
+Swiftly is intended to be primarily called via a shebang. To do so,
+replace the swift sheband with:
+
+    #!/usr/bin/env swiftly
+
 ## Rationale
 
 Swift REPL startup time is much slower than that of compiled binaries.
