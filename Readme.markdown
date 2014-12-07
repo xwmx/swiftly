@@ -9,9 +9,9 @@
 
 Transparent compilation for Swift command line scripts / programs.
 
-When added used to run swift command line programs, compiles the program, saves
-the binary to a cache directory, and then calls the binary. On subsequent runs,
-the binary is called instead of using the REPL.
+When used to run swift command line programs, swiftly compiles the program,
+saves the binary to a cache directory, and then calls the binary. On
+subsequent runs, the binary is called instead of using the REPL.
 
 Binaries are stored in subdirectories at `$HOME/.swiftly/cache/`, which is
 created when `swiftly` is called for the first time. Each binary gets it
