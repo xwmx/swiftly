@@ -7,7 +7,7 @@
 
 # Swiftly
 
-Transparent compilation for Swift scripts.
+Transparent compilation for Swift command line scripts / programs.
 
 When added used to run swift command line programs, compiles the program, saves
 the binary to a cache directory, and then calls the binary. On subsequent runs,
