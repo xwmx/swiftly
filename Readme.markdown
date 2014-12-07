@@ -47,9 +47,8 @@ compiled (all subsequent runs)
 
 ## Caveats
 
-This is a project to help me learn more about Swift and use it for shell
-scripting. There might be a better way approaching this, and would love to
-hear suggestions and learn more.
+There might be a better way approaching this, and I'd love to hear
+suggestions.
 
 ## TODO
 
