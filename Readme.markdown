@@ -18,3 +18,13 @@ created when `swiftly` is called for the first time. Each binary gets it
 own directory, and the filename of each binary is set to the last
 modified timestamp of the source file, resulting in a final directory
 structure of: $HOME/.swiftly/cache/binary_name/last_modified_timestamp`
+
+## Caveats
+
+This is a project to help me learn more about Swift and use it for shell
+scripting. There might be a better way approaching this, and would love to
+hear suggestions and learn more.
+
+## TODO
+
+Remove old binary files.
