@@ -1,24 +1,29 @@
 #!/usr/bin/env swiftly
 
 // Example file for swiftly
+//
+// Demonstrates that basic input and output works exactly the same for a
+// program being run with swiftly as it does for one that's being run with
+// just swift. This program also demonstrates how the shebang can be specified.
 
 import Foundation
 
-var arguments = Process.arguments
+// Get arguments
+let arguments = Process.arguments
 // Get program name
 let programName = arguments[0].lastPathComponent
-// Remove program name from argument list
-arguments.removeAtIndex(0)
 
+// Announce that the program is running.
 println("\(programName): running")
 
+// Print each of the arguments, including the process name.
 var index = 0
-for argument in Process.arguments {
+for argument in arguments {
     println("\(programName) argument [\(index)]: \(argument)")
     index++
 }
 
-// Handle STDIN.
+// Handle standard input.
 func input() -> String {
     let keyboard = NSFileHandle.fileHandleWithStandardInput()
     let inputData = keyboard.availableData
@@ -27,8 +32,8 @@ func input() -> String {
     return trimmedString
 }
 
-
-if arguments.isEmpty {
+// If the only argument is the program name, process standard input.
+if arguments.count == 1 {
     let stdinput = input()
     println("standard input: \(stdinput)")
 }
