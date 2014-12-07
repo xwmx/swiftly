@@ -44,6 +44,12 @@ function compile_swift() {
 }
 
 #==========================================================================
+# swift
+#==========================================================================
+
+swift_original=/usr/bin/swift
+
+#==========================================================================
 # Swiftly directory
 #
 # .swiftly directory in the $HOME
@@ -94,13 +100,13 @@ if [ "$1" == "-h" ]; then
   echo ""
   echo "-------------------------------------------------------------------"
   echo ""
-  swift -h
+  $swift_original -h
   exit 1
 fi
 
 # if there is no first argument, call `swift`, aka, launch the Swift REPL
 if [ -z "$1" ]; then
-  swift
+  $swift_original
   exit 1
 fi
 
@@ -115,7 +121,7 @@ program_arguments=${*:2}
 
 # if the calling program doesn't exist, print usage info and exit.
 if ! program_exists $program_basename; then
-  swift $program_arguments
+  $swift_original $program_arguments
   exit 1
 fi
 
