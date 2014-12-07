@@ -4,11 +4,17 @@
 
 import Foundation
 
-println("example.swift: running")
+var arguments = Process.arguments
+// Get program name
+let programName = arguments[0].lastPathComponent
+// Remove program name from argument list
+arguments.removeAtIndex(0)
+
+println("\(programName): running")
 
 var index = 0
 for argument in Process.arguments {
-    println("example.swift argument [\(index)]: \(argument)")
+    println("\(programName) argument [\(index)]: \(argument)")
     index++
 }
 
