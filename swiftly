@@ -88,15 +88,19 @@ Example shebang:
 EOM
 
 
-# Print usage information if passed `-h` flag
+# Print usage information for both swiftly and swift if passed `-h` flag
 if [ "$1" == "-h" ]; then
   echo "$usage"
+  echo ""
+  echo "-------------------------------------------------------------------"
+  echo ""
+  swift -h
   exit 1
 fi
 
-# if the calling program doesn't exist, print usage info and exit.
+# if there is no first argument, call `swift`, aka, launch the Swift REPL
 if [ -z "$1" ]; then
-  echo "$usage"
+  swift
   exit 1
 fi
 
@@ -111,7 +115,7 @@ program_arguments=${*:2}
 
 # if the calling program doesn't exist, print usage info and exit.
 if ! program_exists $program_basename; then
-  echo "$usage"
+  swift $program_arguments
   exit 1
 fi
 
