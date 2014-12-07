@@ -28,6 +28,7 @@ func input() -> String {
 }
 
 
-if Process.arguments[1] == "-stdin" {
-    println(input())
+if arguments.isEmpty {
+    let stdinput = input()
+    println("standard input: \(stdinput)")
 }
