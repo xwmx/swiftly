@@ -40,7 +40,6 @@ function program_exists() {
 
 # Execute swiftc with the `macosx` sdk
 function compile_swift() {
-  echo "compile_swift: $1 and $2"
   [ -z "$1" ] && echo "compile_swift(): output path not specified"
   [ -z "$2" ] && echo "compile_swift(): Source path not specified"
   /usr/bin/env xcrun -sdk macosx swiftc -o $1 $2
