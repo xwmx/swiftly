@@ -94,7 +94,7 @@ fi
 #==========================================================================
 
 read -r -d '' usage <<- EOM
-Usage: swiftly program ...
+Usage: swiftly program_name [options]
 
 Transparent compilation for Swift scripts.
 
@@ -111,6 +111,7 @@ if [ "$1" == "-h" ]; then
   echo "$usage"
   echo ""
   echo "-------------------------------------------------------------------"
+  echo "swift help:"
   echo ""
   $swift_original -h
   exit 1
