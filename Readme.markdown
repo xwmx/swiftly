@@ -56,6 +56,3 @@ compiled (all subsequent runs)
 There might be a better way approaching this, and I'd love to hear
 suggestions.
 
-## TODO
-
-Automatically remove outdated cached binary files.
