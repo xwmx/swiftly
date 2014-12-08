@@ -6,7 +6,8 @@
 // program being run with swiftly as it does for one that's being run with
 // just swift. This program also demonstrates the swiftly shebang.
 //
-// William Melody, 2014 - https://github.com/alphabetum/swiftly/
+// William Melody, 2014 - hi@williammelody.com
+// https://github.com/alphabetum/swiftly/
 
 
 import Foundation
