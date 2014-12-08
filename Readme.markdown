@@ -23,8 +23,8 @@ directory structure is:
     $HOME/.swiftly/cache/executable_filenename/last_modified_timestamp/executable_filenename
 
 The `swiftly` executable can also be used in place of the `swift`
-program and should behave the same in most cases, eg, when running
-`swiftly` with no arguments, the Swift REPL will launch.
+program and should behave the same. For example, when running `swiftly` with no
+arguments, the Swift REPL will launch.
 
 ## Installation
 
