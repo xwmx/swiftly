@@ -4,10 +4,9 @@
 //
 // Demonstrates that basic input and output works exactly the same for a
 // program being run with swiftly as it does for one that's being run with
-// just swift. This program also demonstrates how the shebang can be specified.
+// just swift. This program also demonstrates the swiftly shebang.
 //
-// William Melody, 2014
-// https://github.com/alphabetum/swiftly/
+// William Melody, 2014 - https://github.com/alphabetum/swiftly/
 
 
 import Foundation
