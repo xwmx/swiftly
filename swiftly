@@ -157,8 +157,7 @@ if [ ! -f $binary_path ]; then
     mkdir -p $binary_dir
   fi
 
-  compile_swift $binary_path $program
-  $(cleanup_swiftly_binaries_in "$binary_program_dir")
+  compile_swift $binary_path $program && $(cleanup_swiftly_binaries_in "$binary_program_dir")
 fi
 
 # call the compiled binary
