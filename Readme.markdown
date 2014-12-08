@@ -29,12 +29,8 @@ arguments, the Swift REPL will launch.
 ## Installation
 
 Simply add the `swiftly` executable to your `$PATH` and use it in place
-of the `swift` command when running swift scripts. To use as a wrapper
-for the existing `swift` executable, copy the script to a location in
-your `$PATH` that supercedes that of the existing `swift` executable.
-
-Swiftly is intended to be primarily called via a shebang. To do so,
-replace the swift sheband with:
+of the `swift` command when running swift scripts. To use run a script with
+`swiftly`, set the shebang to:
 
     #!/usr/bin/env swiftly
 
