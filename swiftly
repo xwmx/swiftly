@@ -131,10 +131,13 @@ program_basename=$(basename $program)
 program_timestamp=$(stat -f '%m' $program)
 program_arguments=${*:2}
 
-# if the calling program doesn't exist, print usage info and exit.
-if ! program_exists $program_basename; then
-  $swift_original $program_arguments
-  exit 1
+# if the calling program doesn't exist as a file, then check the PATH. If it
+# doesn't exist in the PATH, pass all the arguments to the original swift.
+if [ ! -f $program ]; then
+  if ! program_exists $program_basename; then
+    $swift_original $program_arguments
+    exit 1
+  fi
 fi
 
 #==========================================================================
