@@ -151,10 +151,12 @@ binary_filename="$program_basename"
 binary_path="$binary_dir/$binary_filename"
 
 #==========================================================================
-# program variables
+# compile
 #==========================================================================
 
-
+# If the binary doesn't yet exist, then create the binary directory if
+# needed (which it probably is) and compile the program. If compilation
+# succeeds, then cleanup any old binary directories.
 if [ ! -f $binary_path ]; then
   if [ ! -d $binary_dir ]; then
     mkdir -p $binary_dir
