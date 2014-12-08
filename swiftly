@@ -151,25 +151,22 @@ binary_filename="$program_basename"
 binary_path="$binary_dir/$binary_filename"
 
 #==========================================================================
-# compile
+# compile and run
 #==========================================================================
 
-# If the binary doesn't yet exist, then create the binary directory if
-# needed (which it probably is) and compile the program. If compilation
-# succeeds, then cleanup any old binary directories.
-if [ ! -f $binary_path ]; then
+# If the compiled binary already exists, then run the program. If the binary
+# doesn't yet exist, then create the binary directory if needed (which it
+# probably is) and compile the program. If compilation succeeds, then cleanup
+# any old binary directories, then run the program.
+if [ -f $binary_path ]; then
+  $binary_path $program_arguments
+else
   if [ ! -d $binary_dir ]; then
     mkdir -p $binary_dir
   fi
 
-  compile_swift $binary_path $program && $(cleanup_swiftly_binaries_in "$binary_program_dir")
+  compile_swift $binary_path $program &&
+    $(cleanup_swiftly_binaries_in "$binary_program_dir") &&
+    $binary_path $program_arguments
 fi
-
-#==========================================================================
-# run
-#==========================================================================
-
-# call the compiled binary
-$binary_path $program_arguments
-
 
