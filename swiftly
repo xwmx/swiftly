@@ -21,6 +21,9 @@
 # directory structure is:
 #
 #     $HOME/.swiftly/cache/executable_filenename/last_modified_timestamp/executable_filenename
+#
+# William Melody, 2014
+# https://github.com/alphabetum/swiftly/
 
 
 #==========================================================================
