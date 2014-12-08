@@ -160,6 +160,10 @@ if [ ! -f $binary_path ]; then
   compile_swift $binary_path $program && $(cleanup_swiftly_binaries_in "$binary_program_dir")
 fi
 
+#==========================================================================
+# run
+#==========================================================================
+
 # call the compiled binary
 $binary_path $program_arguments
 
