@@ -34,19 +34,19 @@
 #
 # For information on why `which` is not being used, see:
 # http://stackoverflow.com/a/677212
-function program_exists() {
+program_exists() {
   hash $1 2>/dev/null
 }
 
 # Execute swiftc with the `macosx` sdk
-function compile_swift() {
+compile_swift() {
   [ -z "$1" ] && echo "compile_swift(): output path not specified"
   [ -z "$2" ] && echo "compile_swift(): Source path not specified"
   /usr/bin/env xcrun -sdk macosx swiftc -o $1 $2
 }
 
 # remove all but the most recent binary folder for a given program cache path.
-function cleanup_swiftly_binaries_in () {
+cleanup_swiftly_binaries_in() {
  [ -z "$1" ] && exit 1
   cd $1
   number_of_files="$(ls -1 | wc -l | tr -d ' ')"
