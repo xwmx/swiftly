@@ -93,7 +93,12 @@ fi
 # Help
 #==========================================================================
 
-read -r -d '' usage <<- EOM
+# Print usage information for both swiftly and swift if passed `-h` flag
+if [ "$1" == "-h" ]; then
+  cat <<EOM
+Swiftly
+-------
+
 Usage: swiftly program_name [options]
 
 Transparent compilation for Swift scripts.
@@ -103,16 +108,11 @@ cached location.
 
 Example shebang:
   !#/usr/bin/env swiftly
+
+Swift
+-----
+
 EOM
-
-
-# Print usage information for both swiftly and swift if passed `-h` flag
-if [ "$1" == "-h" ]; then
-  echo "$usage"
-  echo ""
-  echo "-------------------------------------------------------------------"
-  echo "swift help:"
-  echo ""
   $swift_original -h
   exit 1
 fi
