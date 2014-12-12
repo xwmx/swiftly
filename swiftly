@@ -130,7 +130,14 @@ fi
 program=$1
 program_basename=$(basename $program)
 program_timestamp=$(stat -f '%m' $program)
+program_extension="${program_basename##*.}"
 program_arguments=${*:2}
+
+# If the program extension is the same as the basename, then the program
+# didn't have an extension, so set the variable to an empty string.
+if [ "$program_extension" == "$program_basename" ]; then
+  program_extension=""
+fi
 
 # if the calling program doesn't exist as a file, then check the PATH. If it
 # doesn't exist in the PATH, pass all the arguments to the original swift.
@@ -156,13 +163,23 @@ binary_path="$binary_dir/$binary_filename"
 
 # If the compiled binary already exists, then run the program. If the binary
 # doesn't yet exist, then create the binary directory if needed (which it
-# probably is) and compile the program. If compilation succeeds, then cleanup
-# any old binary directories, then run the program.
+# probably is), add the extension to the program name if necessary (swiftc
+# requires it), and compile the program. If compilation succeeds, then clean
+# up any old binary directories, then run the program.
 if [ -f $binary_path ]; then
   $binary_path $program_arguments
 else
+  # Create the binary directory if it doesn't exist.
   if [ ! -d $binary_dir ]; then
     mkdir -p $binary_dir
+  fi
+
+  # If the program doesn't have an extension, copy it to the binary directory
+  # with the swift extension appended and set that to the program path.
+  if [ -z "$program_extension" ]; then
+    program_with_extension="$binary_dir/$program_basename".swift
+    cp $program $program_with_extension
+    program=$program_with_extension
   fi
 
   compile_swift $binary_path $program &&
