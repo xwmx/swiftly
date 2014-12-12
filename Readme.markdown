@@ -49,6 +49,7 @@ compiled (all subsequent runs)
 
 ## Caveats
 
-There might be a better way approaching this, and I'd love to hear
+This is still mostly an experiment at this point, though it should work
+fine. There might be a better way approaching this, and I'd love to hear
 suggestions.
 
