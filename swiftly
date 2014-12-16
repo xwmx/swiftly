@@ -40,8 +40,8 @@ program_exists() {
 
 # Execute swiftc with the `macosx` sdk
 compile_swift() {
-  [ -z "$1" ] && echo "compile_swift(): output path not specified"
-  [ -z "$2" ] && echo "compile_swift(): Source path not specified"
+  [ -z "$1" ] && echo "compile_swift(): output path not specified" && exit 1
+  [ -z "$2" ] && echo "compile_swift(): Source path not specified" && exit 1
   /usr/bin/env xcrun -sdk macosx swiftc -o $1 $2
 }
 
