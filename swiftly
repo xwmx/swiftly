@@ -183,7 +183,7 @@ else
   fi
 
   compile_swift "$binary_path" "$program" &&
-    $(cleanup_swiftly_binaries_in "$binary_program_dir") &&
+    cleanup_swiftly_binaries_in "$binary_program_dir" &&
     $binary_path "$program_arguments"
 fi
 
