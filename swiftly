@@ -35,14 +35,14 @@
 # For information on why `which` is not being used, see:
 # http://stackoverflow.com/a/677212
 program_exists() {
-  hash $1 2>/dev/null
+  hash "$1" 2>/dev/null
 }
 
 # Execute swiftc with the `macosx` sdk
 compile_swift() {
   [ -z "$1" ] && echo "compile_swift(): output path not specified" && exit 1
   [ -z "$2" ] && echo "compile_swift(): Source path not specified" && exit 1
-  /usr/bin/env xcrun -sdk macosx swiftc -o $1 $2
+  /usr/bin/env xcrun -sdk macosx swiftc -o "$1" "$2"
 }
 
 # remove all but the most recent binary folder for a given program cache path.
@@ -71,8 +71,8 @@ swift_original=/usr/bin/swift
 swiftly_directory=$HOME/.swiftly
 
 # if swiftly directory doesn't exist, create it.
-if [ ! -d $swiftly_directory ]; then
-  mkdir $swiftly_directory
+if [ ! -d "$swiftly_directory" ]; then
+  mkdir "$swiftly_directory"
 fi
 
 #==========================================================================
@@ -85,8 +85,8 @@ fi
 cache_dir="$swiftly_directory/cache"
 
 # if cache directory doesn't exist, create it.
-if [ ! -d $cache_dir ]; then
-  mkdir $cache_dir
+if [ ! -d "$cache_dir" ]; then
+  mkdir "$cache_dir"
 fi
 
 #==========================================================================
@@ -128,8 +128,8 @@ fi
 #==========================================================================
 
 program=$1
-program_basename=$(basename $program)
-program_timestamp=$(stat -f '%m' $program)
+program_basename=$(basename "$program")
+program_timestamp=$(stat -f '%m' "$program")
 program_extension="${program_basename##*.}"
 program_arguments=${*:2}
 
@@ -141,9 +141,9 @@ fi
 
 # if the calling program doesn't exist as a file, then check the PATH. If it
 # doesn't exist in the PATH, pass all the arguments to the original swift.
-if [ ! -f $program ]; then
-  if ! program_exists $program_basename; then
-    $swift_original $program_arguments
+if [ ! -f "$program" ]; then
+  if ! program_exists "$program_basename"; then
+    $swift_original "$program_arguments"
     exit 1
   fi
 fi
@@ -166,24 +166,24 @@ binary_path="$binary_dir/$binary_filename"
 # probably is), add the extension to the program name if necessary (swiftc
 # requires it), and compile the program. If compilation succeeds, then clean
 # up any old binary directories, then run the program.
-if [ -f $binary_path ]; then
-  $binary_path $program_arguments
+if [ -f "$binary_path" ]; then
+  $binary_path "$program_arguments"
 else
   # Create the binary directory if it doesn't exist.
-  if [ ! -d $binary_dir ]; then
-    mkdir -p $binary_dir
+  if [ ! -d "$binary_dir" ]; then
+    mkdir -p "$binary_dir"
   fi
 
   # If the program doesn't have an extension, copy it to the binary directory
   # with the swift extension appended and set that to the program path.
   if [ -z "$program_extension" ]; then
     program_with_extension="$binary_dir/$program_basename".swift
-    cp $program $program_with_extension
+    cp "$program" "$program_with_extension"
     program=$program_with_extension
   fi
 
-  compile_swift $binary_path $program &&
+  compile_swift "$binary_path" "$program" &&
     $(cleanup_swiftly_binaries_in "$binary_program_dir") &&
-    $binary_path $program_arguments
+    $binary_path "$program_arguments"
 fi
 
